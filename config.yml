@@ -1,0 +1,101 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: editorial_workflow
+
+local_backend:
+  url: http://localhost:8081/api/v1
+site_url: /
+display_url: /
+logo_url: /admin/logo.svg
+editor:
+  preview: false
+media_folder: public/assets/uploads
+public_folder: /assets/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: portfolio_content
+    label: Manage My Portfolio
+    files:
+      - name: managed
+        label: Projects, Experience & More
+        file: content/managed.json
+        format: json
+        fields:
+          - label: Certifications
+            name: certifications
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            summary: "{{fields.name}}"
+            hint: "Add, remove, or reorder certificates shown in About."
+            fields:
+              - { label: Certificate name, name: name, widget: string }
+              - { label: Issued by, name: issuer, widget: string }
+              - { label: Certificate image, name: imageUrl, widget: image, required: false, hint: "Optional: upload a JPG, PNG, or WebP certificate image." }
+          - label: Toolkit & Skills
+            name: skills
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            summary: "{{fields.name}}"
+            hint: "Tools and skills shown in the moving Toolkit section."
+            fields:
+              - { label: Tool or skill name, name: name, widget: string }
+              - { label: Tool icon, name: imageUrl, widget: image, required: false, hint: "Optional. Existing tools use their built-in icon." }
+              - label: Type
+                name: category
+                widget: select
+                options: [Design, Development, Tools]
+          - label: Work Experiences
+            name: experiences
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            summary: "{{fields.role}} — {{fields.company}}"
+            fields:
+              - { label: Short ID, name: id, widget: string, hint: "A unique short name such as studio-2026. Use lowercase letters and hyphens." }
+              - { label: Show on website, name: visible, widget: boolean, default: true, required: false, hint: "Turn this off to hide the experience without deleting it." }
+              - { label: Display order, name: order, widget: number, value_type: int, min: 1, required: false, hint: "Lower numbers appear first." }
+              - { label: Job title, name: role, widget: string }
+              - { label: Company or organisation, name: company, widget: string }
+              - { label: Dates, name: period, widget: string, required: false, hint: "Example: Jan 2024 – Present" }
+              - label: Type
+                name: type
+                widget: select
+                options: [Full-time, Part-time, Freelance, Student Activity, Business Owner]
+              - { label: What I did, name: description, widget: list, field: { label: Responsibility or achievement, name: item, widget: string } }
+          - label: Portfolio Projects
+            name: projects
+            widget: list
+            collapsed: true
+            minimize_collapsed: true
+            summary: "{{fields.title}} — {{fields.category}}"
+            fields:
+              - { label: Short ID, name: id, widget: string, hint: "A unique short name such as new-brand-project. Use lowercase letters and hyphens." }
+              - { label: Show on website, name: visible, widget: boolean, default: true, required: false, hint: "Hide a draft project without deleting it." }
+              - { label: Display order, name: order, widget: number, value_type: int, min: 1, required: false, hint: "Lower numbers appear first." }
+              - { label: Project title, name: title, widget: string }
+              - { label: Category, name: category, widget: string }
+              - label: Website filter
+                name: group
+                widget: select
+                options: [Logo, Web, Event, Product, Post, Social, Art, Freelance, SocialAds, Graphic]
+              - { label: Project summary, name: description, widget: text }
+              - { label: Cover image, name: imageUrl, widget: image }
+              - { label: Show in Top Projects, name: featured, widget: boolean, default: false, required: false }
+              - { label: Card accent colour, name: accentColor, widget: color, required: false, default: "#8ebad6", hint: "Controls the small colour detail on this project card." }
+              - { label: Year, name: year, widget: string, required: false }
+              - { label: Your role, name: role, widget: string, required: false }
+              - { label: Tools, name: tools, widget: list, required: false }
+              - { label: Project link, name: link, widget: string, required: false }
+              - { label: Challenge, name: challenge, widget: text, required: false }
+              - { label: Solution, name: solution, widget: text, required: false }
+              - { label: Outcome, name: outcome, widget: text, required: false }
+              - { label: Project gallery, name: gallery, widget: list, required: false, field: { label: Image, name: image, widget: image } }
+              - { label: Full case study, name: details, widget: markdown, required: false, hint: "Write the longer story here. You can add headings, paragraphs, lists, and images." }

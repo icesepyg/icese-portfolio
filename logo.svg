@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 96" role="img" aria-labelledby="title">
+  <title id="title">Icese Portfolio</title>
+  <rect width="240" height="96" rx="26" fill="#f4efe7"/>
+  <rect x="12" y="12" width="72" height="72" rx="22" fill="#8ebad6"/>
+  <text x="48" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="27" font-weight="800" fill="#3a1f1a">IC</text>
+  <text x="101" y="44" font-family="Arial, sans-serif" font-size="22" font-weight="800" fill="#3a1f1a">ICESE</text>
+  <text x="101" y="64" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#6a514a">PORTFOLIO</text>
+</svg>

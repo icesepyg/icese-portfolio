@@ -1,0 +1,43 @@
+:root { --ink: #3a1f1a; --paper: #f4efe7; --blue: #8ebad6; --pink: #e8b4c4; }
+body { margin: 0; background: var(--paper); font-family: system-ui, sans-serif; }
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .22; background-image: radial-gradient(rgba(58,31,26,.18) .6px, transparent .6px); background-size: 10px 10px; }
+body > div:not(.dashboard-loader) { color: var(--ink); }
+button, a { border-radius: 12px !important; }
+input, textarea, select {
+  border: 1px solid rgba(58,31,26,.18) !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  color: var(--ink) !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+textarea { min-height: 130px !important; }
+label { color: var(--ink) !important; font-weight: 750 !important; }
+[class*="EditorControlPane"] { max-width: 980px !important; margin-inline: auto !important; padding: 42px 32px 100px !important; }
+[class*="EditorPreviewPane"] { display: none !important; }
+[class*="ControlPaneContainer"] { width: 100% !important; max-width: none !important; }
+[class*="ListCard"] { margin-block: 10px !important; border-radius: 18px !important; border: 1px solid rgba(58,31,26,.12) !important; background: #fffdf8 !important; box-shadow: 0 10px 26px rgba(58,31,26,.06) !important; }
+[class*="ListCard"]:hover { border-color: var(--blue) !important; box-shadow: 0 16px 34px rgba(58,31,26,.1) !important; }
+[class*="ObjectWidgetTopBar"], [class*="ListControlTopBar"] { border-radius: 16px !important; background: #dceaf2 !important; }
+[class*="FieldLabel"] { margin-top: 20px !important; font-size: 14px !important; }
+[class*="FieldHint"] { color: #765f58 !important; font-size: 13px !important; line-height: 1.5 !important; }
+[class*="CollectionTopContainer"], [class*="EntriesCollection"] { max-width: 1180px !important; margin-inline: auto !important; }
+[class*="ToolbarContainer"] { background: rgba(244,239,231,.96) !important; backdrop-filter: blur(14px); }
+[class*="AppHeader"] { background: var(--ink) !important; }
+.dashboard-actions { position: fixed; right: 22px; bottom: 20px; z-index: 9998; display: flex; align-items: center; gap: 8px; padding: 9px; border: 1px solid rgba(58,31,26,.12); border-radius: 18px; background: rgba(255,253,248,.94); box-shadow: 0 16px 45px rgba(58,31,26,.16); backdrop-filter: blur(16px); }
+.dashboard-actions a { display: inline-flex; padding: 10px 13px; background: var(--ink); color: white; font-size: 12px; font-weight: 800; text-decoration: none; }
+.dashboard-actions a:nth-child(2) { background: var(--blue); color: var(--ink); }
+.dashboard-actions span { padding: 0 8px; color: #765f58; font-size: 11px; font-weight: 700; }
+.dashboard-loader { position: fixed; inset: 0; z-index: 9999; display: grid; place-content: center; justify-items: center; gap: 24px; background: var(--paper); color: var(--ink); transition: opacity 240ms cubic-bezier(.23,1,.32,1), visibility 240ms; }
+.dashboard-loader.is-ready { opacity: 0; visibility: hidden; pointer-events: none; }
+.dashboard-loader p { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.loader-folder { position: relative; width: 96px; height: 72px; border-radius: 0 14px 14px; background: var(--blue); box-shadow: 0 18px 38px rgba(58,31,26,.16); animation: folder-breathe 1.2s ease-in-out infinite alternate; }
+.loader-folder::before { content: ''; position: absolute; bottom: 100%; width: 38px; height: 12px; border-radius: 8px 8px 0 0; background: var(--blue); }
+.loader-folder span { position: absolute; inset: 14px 10px 8px; border-radius: 9px; background: #fff; transform: rotate(-4deg); }
+@keyframes folder-breathe { to { transform: translateY(-8px) rotate(2deg); } }
+@media (prefers-reduced-motion: reduce) { .loader-folder { animation: none; } }
+@media (max-width: 720px) {
+  [class*="EditorControlPane"] { padding: 24px 14px 110px !important; }
+  .dashboard-actions { left: 10px; right: 10px; bottom: 10px; justify-content: center; flex-wrap: wrap; }
+  .dashboard-actions span { display: none; }
+}

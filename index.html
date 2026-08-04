@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#f4efe7" />
+    <title>Icese — Portfolio Dashboard</title>
+    <link rel="stylesheet" href="/admin/admin.css" />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <nav class="dashboard-actions" aria-label="Dashboard shortcuts">
+      <a href="/" target="_blank" rel="noopener">View portfolio ↗</a>
+      <a href="/admin/#/media">Media library</a>
+      <a href="/admin/#/workflow">Drafts & workflow</a>
+      <span>Saved safely through Git</span>
+    </nav>
+    <div class="dashboard-loader" aria-live="polite">
+      <div class="loader-folder"><span></span></div>
+      <p>Opening your portfolio dashboard…</p>
+    </div>
+    <script src="https://unpkg.com/decap-cms@^3.8.0/dist/decap-cms.js"></script>
+    <script>
+      window.addEventListener('load', function () {
+        window.setTimeout(function () {
+          document.querySelector('.dashboard-loader')?.classList.add('is-ready');
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
