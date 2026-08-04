@@ -1,32 +1,156 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex" />
-    <meta name="theme-color" content="#f4efe7" />
-    <title>Icese — Portfolio Dashboard</title>
-    <link rel="stylesheet" href="/admin/admin.css" />
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  </head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Icese | Creative Design Portfolio</title>
+    <meta name="description" content="Portfolio of Phoon Yuk Guan (Icese) - UI/UX Designer & Creative Developer" />
+    <link rel="icon" type="image/svg+xml" href="/lucky-clover.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --cursor-size: 20px;
+        --cursor-hover-size: 80px;
+        --color-pink: #fce7f3;
+        --color-pink-dark: #be185d;
+        --color-green: #dcfce7;
+        --color-green-dark: #15803d;
+      }
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background-color: #fffbf7; /* Warm cream */
+        color: #1f2937;
+        overflow-x: hidden;
+        cursor: none;
+      }
+      
+      h1, h2, h3, h4, .font-serif {
+        font-family: 'Playfair Display', serif;
+      }
+      
+      .font-script {
+        font-family: 'Pinyon Script', cursive;
+      }
+
+      /* Noise Texture */
+      .bg-noise {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 50;
+        opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+
+      /* Custom Cursor */
+      .custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: var(--cursor-size);
+        height: var(--cursor-size);
+        background-color: #db2777; 
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1), 
+                    height 0.4s cubic-bezier(0.19, 1, 0.22, 1), 
+                    background-color 0.3s;
+        mix-blend-mode: multiply;
+      }
+      .custom-cursor.hovered {
+        width: var(--cursor-hover-size);
+        height: var(--cursor-hover-size);
+        background-color: #16a34a; /* Green on hover */
+        opacity: 0.5;
+        mix-blend-mode: normal;
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #fffbf7;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #fbcfe8;
+        border-radius: 6px;
+        border: 3px solid #fffbf7;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #f472b6;
+      }
+
+      /* Animations */
+      @keyframes float-slow {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(2deg); }
+      }
+      .animate-float-slow {
+        animation: float-slow 8s ease-in-out infinite;
+      }
+      
+      @keyframes popIn {
+        0% { transform: scale(.94); opacity: 0; }
+        50% { transform: scale(1.15); opacity: 1; }
+        75% { transform: scale(0.95); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+      .animate-pop-in {
+        animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      }
+      
+      @keyframes ticker {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+      .animate-ticker {
+        animation: ticker 20s linear infinite;
+      }
+
+      /* Utility */
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+      
+      ::selection {
+        background: #fbcfe8; /* pink-200 */
+        color: #831843; /* pink-900 */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
   <body>
-    <nav class="dashboard-actions" aria-label="Dashboard shortcuts">
-      <a href="/" target="_blank" rel="noopener">View portfolio ↗</a>
-      <a href="/admin/#/media">Media library</a>
-      <a href="/admin/#/workflow">Drafts & workflow</a>
-      <span>Saved safely through Git</span>
-    </nav>
-    <div class="dashboard-loader" aria-live="polite">
-      <div class="loader-folder"><span></span></div>
-      <p>Opening your portfolio dashboard…</p>
-    </div>
-    <script src="https://unpkg.com/decap-cms@^3.8.0/dist/decap-cms.js"></script>
-    <script>
-      window.addEventListener('load', function () {
-        window.setTimeout(function () {
-          document.querySelector('.dashboard-loader')?.classList.add('is-ready');
-        }, 500);
-      });
-    </script>
-  </body>
+    <div id="root"></div>
+    
+    <!-- Hidden Netlify Form for Lead Capture -->
+    <form name="chatbot-leads" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="email" />
+      <input type="text" name="details" />
+    </form>
+  <script src="/vendor/gsap.min.js"></script>
+  <script src="/vendor/ScrollTrigger.min.js"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>
