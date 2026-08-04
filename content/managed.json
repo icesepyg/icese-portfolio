@@ -85,13 +85,17 @@
     {
       "name": "CapCut / InShot",
       "category": "Tools"
+    },
+    {
+      "name": "Codex",
+      "category": "Tools"
     }
   ],
   "experiences": [
     {
       "id": "3go-tech",
       "role": "UI/UX Designer",
-      "company": "3GO Technology Sdn Bhd",
+      "company": "3GO TECHNOLOGY Sdn Bhd",
       "type": "Full-time",
       "description": [
         "Conceptualize and create intuitive, engaging, and brand-consistent web experiences.",
