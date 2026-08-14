@@ -189,6 +189,11 @@
       "order": 1,
       "visible": true,
       "outcome": "NutriShare developed into a complete multi-role product concept covering the food-sharing journey from donation and discovery to volunteer delivery and receiver confirmation.\n\nThe final prototype established clearer food information, more transparent reservation updates, stronger accountability through proof of delivery and reporting, and a consistent interface across mobile and web. Through iterative consultation, the project evolved from a broad marketplace concept into a focused charity-based food aid platform, with its interface recognised by supervisors as meeting industry expectations.",
+      "gallery": [
+        "/assets/uploads/nutrishare-user-flows.png",
+        "/assets/uploads/nutrishare-ui-kit.png",
+        "/assets/uploads/nutrishare-research.png"
+      ],
       "imageUrl": "/assets/uploads/screenshot-2026-08-14-at-20.41.29.png",
       "role": "Product Designer, UX Researcher & Front-End Developer",
       "title": "NutriShare — Community Food Aid Platform",
