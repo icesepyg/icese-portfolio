@@ -8,7 +8,7 @@ const Skills: React.FC = () => (
     <div className="skills-marquee relative mb-20 flex w-max whitespace-nowrap">
       {[0, 1].map((copy) => (
         <div key={copy} className="flex items-center">
-          {['UI/UX DESIGN', 'BRANDING', 'WEB EXPERIENCES', 'CREATIVE DIRECTION'].map((item) => (
+          {['UI/UX DESIGN', 'DESIGN SYSTEMS', 'AI WORKFLOWS', 'WEB EXPERIENCES', 'BRANDING'].map((item) => (
             <React.Fragment key={`${copy}-${item}`}>
               <span className="px-6 text-[clamp(3rem,7vw,7rem)] font-black leading-none tracking-[-.07em] text-[#3a1f1a]">{item}</span>
               <span className="font-serif text-6xl italic text-[#e8b4c4]">✦</span>

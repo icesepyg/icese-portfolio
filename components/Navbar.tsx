@@ -4,6 +4,7 @@ import { SectionId } from '../types';
 
 const LINKS = [
   [SectionId.ABOUT, 'About'],
+  [SectionId.AWARDS, 'Awards'],
   [SectionId.EXPERIENCE, 'Experience'],
   [SectionId.PORTFOLIO, 'Projects'],
   [SectionId.CONTACT, 'Contact'],

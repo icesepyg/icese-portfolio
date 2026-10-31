@@ -170,7 +170,7 @@ const Hero: React.FC = () => {
           <div className="overflow-hidden pb-3">
             <h1 className="hero-name-line text-[clamp(3.1rem,7.5vw,7.8rem)] font-black leading-[.82] tracking-[-.07em] text-[#75a7c7]">(Icese) Portfolio</h1>
           </div>
-          <p className="hero-name-line mt-4 text-xs font-black uppercase tracking-[.28em] text-[#6a514a] md:text-sm">UI/UX · Product Designer</p>
+          <p className="hero-name-line mt-4 text-xs font-black uppercase tracking-[.28em] text-[#6a514a] md:text-sm">UI/UX · Product Designer · AI-native workflows</p>
         </div>
 
         <div className={`hero-navigation ${folderOpen ? 'is-open' : ''}`} aria-hidden={!folderOpen}>

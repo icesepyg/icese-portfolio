@@ -16,19 +16,23 @@ interface PortfolioProps {
 }
 
 const CATEGORIES = [
-  { id: 'Top', label: 'Top Projects' },
-  { id: 'UIUX', label: 'UI/UX' },
-  { id: 'Graphic', label: 'Graphic Design' },
-  { id: 'Social', label: 'Social Media' },
+  { id: 'Top', label: 'Featured work', hint: 'Start here' },
+  { id: 'Product', label: 'Product & AI', hint: 'Apps, fintech and AI tools' },
+  { id: 'Web', label: 'Websites & interactive', hint: 'Sites, web apps and client work' },
+  { id: 'Brand', label: 'Brand & graphic', hint: 'Identity, type and events' },
+  { id: 'Social', label: 'Social & video', hint: 'Posts, ads and reels' },
 ];
+
+const PRODUCT_EXTRAS = new Set(['nutrishare-food-aid-platform', 'interactive-photobooth']);
 
 const getProjects = (filter: string) => {
   if (filter === 'Top') {
     const featured = PROJECTS.filter((project) => project.featured);
     return featured.length >= 4 ? featured : PROJECTS;
   }
-  if (filter === 'UIUX') return PROJECTS.filter((p) => ['Web', 'Product'].includes(p.group));
-  if (filter === 'Graphic') return PROJECTS.filter((p) => ['Logo', 'Art', 'Event', 'Graphic'].includes(p.group));
+  if (filter === 'Product') return PROJECTS.filter((p) => p.group === 'Product' || PRODUCT_EXTRAS.has(p.id));
+  if (filter === 'Web') return PROJECTS.filter((p) => p.group === 'Web' || p.group === 'Freelance');
+  if (filter === 'Brand') return PROJECTS.filter((p) => ['Logo', 'Art', 'Event', 'Graphic'].includes(p.group));
   if (filter === 'Social') return PROJECTS.filter((p) => ['Social', 'SocialAds', 'Post'].includes(p.group));
   return PROJECTS;
 };
@@ -57,6 +61,33 @@ const ProjectStory: React.FC<{
   onNext: () => void;
 }> = ({ project, onClose, onNext }) => {
   const storyRef = useRef<HTMLDivElement>(null);
+  const [zoom, setZoom] = useState<{ src: string; alt: string } | null>(null);
+  const projectLinks = useMemo(() => {
+    const list = [...(project.links || [])];
+    if (project.link && !list.some((item) => item.url === project.link)) list.push({ label: 'Visit project', url: project.link });
+    return list;
+  }, [project]);
+  const primaryLink = projectLinks[0];
+
+  useEffect(() => {
+    const root = storyRef.current;
+    if (!root) return;
+    const open = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const image = target.closest('.project-story-body img, .story-gallery img') as HTMLImageElement | null;
+      if (!image || image.closest('a')) return;
+      setZoom({ src: image.currentSrc || image.src, alt: image.alt });
+    };
+    root.addEventListener('click', open);
+    return () => root.removeEventListener('click', open);
+  }, [project.id]);
+
+  useEffect(() => {
+    if (!zoom) return;
+    const key = (event: KeyboardEvent) => { if (event.key === 'Escape') setZoom(null); };
+    window.addEventListener('keydown', key);
+    return () => window.removeEventListener('keydown', key);
+  }, [zoom]);
 
   useEffect(() => {
     const gsap = window.gsap;
@@ -116,9 +147,13 @@ const ProjectStory: React.FC<{
         <button onClick={onClose} className="flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-xs font-black uppercase tracking-wider shadow-[0_12px_30px_rgba(58,31,26,.12)]">
           <ArrowLeft size={17} /> Back
         </button>
-        <span className="hidden rounded-full bg-[#3a1f1a] px-5 py-3 text-[10px] font-black uppercase tracking-[.2em] text-white sm:block">
-          Icese’s project journal
-        </span>
+        {primaryLink ? (
+          <a href={primaryLink.url} target="_blank" rel="noopener noreferrer" className="story-live-pill flex items-center gap-2 rounded-full bg-[#3a1f1a] px-4 py-3 text-xs font-bold text-white shadow-[0_12px_30px_rgba(58,31,26,.2)] transition-transform hover:-translate-y-0.5 sm:px-5 sm:text-sm">
+            <span className="story-live-dot" aria-hidden="true" />{primaryLink.label}<ExternalLink size={15} aria-hidden="true" />
+          </a>
+        ) : (
+          <span className="hidden rounded-full bg-[#3a1f1a] px-5 py-3 text-[10px] font-black uppercase tracking-[.2em] text-white sm:block">Icese’s project journal</span>
+        )}
         <button onClick={onClose} aria-label="Close project" className="rounded-2xl bg-[#e8b4c4] p-3 text-[#3a1f1a] shadow-[0_12px_30px_rgba(58,31,26,.12)]">
           <X size={20} />
         </button>
@@ -146,10 +181,14 @@ const ProjectStory: React.FC<{
             <div className="mt-7 flex flex-wrap gap-2">
               {project.tools?.map((tool) => <span key={tool} className="rounded-full border border-white/35 px-3 py-1 text-xs font-bold">{tool}</span>)}
             </div>
-            {project.link && (
-              <a href={project.link} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex items-center gap-2 border-b-2 border-white pb-1 text-sm font-black uppercase">
-                Visit project <ExternalLink size={16} />
-              </a>
+            {projectLinks.length > 0 && (
+              <div className="mt-7 flex flex-wrap gap-3">
+                {projectLinks.map((item, index) => (
+                  <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" data-cursor="OPEN" className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold transition-transform hover:-translate-y-0.5 ${index === 0 ? 'bg-[#f6e6a6] text-[#171815] shadow-[0_10px_26px_rgba(246,230,166,.35)]' : 'border border-white/40 text-white hover:bg-white/10'}`}>
+                    {item.label} <ExternalLink size={15} aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
             )}
           </div>
         </div>
@@ -180,10 +219,26 @@ const ProjectStory: React.FC<{
             <div className="project-story-body rounded-[2.5rem] bg-white p-6 shadow-[0_25px_70px_rgba(58,31,26,.12)] md:p-12" dangerouslySetInnerHTML={{ __html: formatCaseStudy(project.details, project.description) }} />
           </div>
           {project.gallery && project.gallery.length > 0 && (
-            <div className="story-reveal mb-20 grid gap-5 md:grid-cols-2">
+            <div className="story-gallery story-reveal mb-20 grid gap-5 md:grid-cols-2">
               {project.gallery.map((image, index) => (
                 <img key={`${image}-${index}`} src={image} alt={`${project.title} gallery ${index + 1}`} className="w-full rounded-[2rem] bg-white p-2 shadow-[0_20px_50px_rgba(58,31,26,.12)]" />
               ))}
+            </div>
+          )}
+
+          {projectLinks.length > 0 && (
+            <div className="story-reveal mb-10 grid items-center gap-6 rounded-[2.5rem] bg-[#3a1f1a] p-8 text-white shadow-[0_25px_70px_rgba(58,31,26,.18)] md:grid-cols-[1fr_auto] md:p-12">
+              <div>
+                <p className="text-sm font-bold text-[#f6e6a6]">Seen enough screenshots?</p>
+                <p className="mt-2 text-[clamp(2rem,4vw,3.4rem)] font-black leading-[.95] tracking-[-.05em]">Try {project.title.split(/[—:]/)[0].trim()} yourself.</p>
+              </div>
+              <div className="flex flex-wrap gap-3 md:justify-end">
+                {projectLinks.map((item, index) => (
+                  <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" data-cursor="OPEN" className={`inline-flex items-center gap-2 rounded-full px-6 py-4 text-sm font-bold transition-transform hover:-translate-y-0.5 ${index === 0 ? 'bg-[#f6e6a6] text-[#171815]' : 'border border-white/35 text-white hover:bg-white/10'}`}>
+                    {item.label} <ExternalLink size={16} aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
             </div>
           )}
 
@@ -196,15 +251,25 @@ const ProjectStory: React.FC<{
           </button>
         </div>
       </main>
+      {zoom && (
+        <div className="story-zoom fixed inset-0 z-[140] flex items-center justify-center bg-[#171311]/92 p-4 md:p-10" role="dialog" aria-modal="true" aria-label="Enlarged image" onClick={() => setZoom(null)}>
+          <img src={zoom.src} alt={zoom.alt} className="max-h-full max-w-full rounded-2xl object-contain shadow-2xl" />
+          <button onClick={() => setZoom(null)} aria-label="Close enlarged image" className="absolute right-4 top-4 rounded-full bg-white p-3 text-[#3a1f1a]"><X size={20} /></button>
+          {zoom.alt && <p className="absolute bottom-4 left-1/2 max-w-[90vw] -translate-x-1/2 rounded-full bg-black/60 px-4 py-2 text-center text-sm text-white">{zoom.alt}</p>}
+        </div>
+      )}
     </div>
   );
 };
 
 const Portfolio: React.FC<PortfolioProps> = ({ onModalChange }) => {
   const [filter, setFilter] = useState('Top');
+  const [showAll, setShowAll] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const filtered = useMemo(() => getProjects(filter).slice(0, 8), [filter]);
+  const allInFilter = useMemo(() => getProjects(filter), [filter]);
+  const initialCount = filter === 'Top' ? 12 : 8;
+  const filtered = showAll ? allInFilter : allInFilter.slice(0, initialCount);
 
   useEffect(() => {
     onModalChange?.(Boolean(selectedProject));
@@ -282,10 +347,11 @@ const Portfolio: React.FC<PortfolioProps> = ({ onModalChange }) => {
       cleanups.forEach((cleanup) => cleanup());
       context.revert();
     };
-  }, [filter]);
+  }, [filter, showAll]);
 
   const changeFilter = (id: string) => {
     setFilter(id);
+    setShowAll(false);
   };
 
   const nextProject = () => {
@@ -302,12 +368,12 @@ const Portfolio: React.FC<PortfolioProps> = ({ onModalChange }) => {
           <div className="mb-16 grid items-end gap-8 lg:grid-cols-[1fr_auto]" data-scroll-reveal>
             <div>
               <span className="text-sm font-semibold text-[#75a7c7]">projects / archive</span>
-              <h2 className="mt-4 text-[clamp(4rem,9vw,9rem)] font-black leading-[.78] tracking-[-.075em] text-[#3a1f1a]">Pick a <span className="font-serif italic font-medium text-[#75a7c7]">category.</span></h2>
+              <h2 className="mt-4 text-[clamp(4rem,9vw,9rem)] font-black leading-[.78] tracking-[-.075em] text-[#3a1f1a]">Browse by <span className="font-serif italic font-medium text-[#75a7c7]">type.</span></h2>
             </div>
-            <p className="max-w-sm text-base leading-relaxed text-[#6a514a]">Open a folder to browse the work inside. Hover over a project file to bring it forward.</p>
+            <p className="max-w-sm text-base leading-relaxed text-[#6a514a]">Featured work is the quickest overview. Each folder groups projects by the kind of work, and every project opens a full case study.</p>
           </div>
 
-          <div className="category-folder-grid mb-20 grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-8">
+          <div className="category-folder-grid mb-20 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6">
             {CATEGORIES.map((category) => {
               const previews = getProjects(category.id).slice(0, 3).map((project) => project.imageUrl);
               const active = filter === category.id;
@@ -319,7 +385,8 @@ const Portfolio: React.FC<PortfolioProps> = ({ onModalChange }) => {
                     </div>
                   </div>
                   <span className="mt-5 block text-sm font-semibold text-[#3a1f1a] md:text-base">{category.label}</span>
-                  <span className="mt-1 block text-xs text-[#8a716a]">{getProjects(category.id).length} files</span>
+                  <span className="mt-1 block text-xs text-[#8a716a]">{category.hint}</span>
+                  <span className="mt-1 block text-xs font-semibold text-[#75a7c7]">{getProjects(category.id).length} projects</span>
                 </button>
               );
             })}
@@ -327,14 +394,14 @@ const Portfolio: React.FC<PortfolioProps> = ({ onModalChange }) => {
 
           <div className="mb-8 flex items-center justify-between border-b border-[#3a1f1a]/12 pb-4">
             <h3 className="text-2xl font-semibold tracking-[-.03em] text-[#3a1f1a]">{CATEGORIES.find((category) => category.id === filter)?.label}</h3>
-            <span className="text-sm text-[#8a716a]">{filtered.length} shown</span>
+            <span className="text-sm text-[#8a716a]">{filtered.length} of {allInFilter.length}</span>
           </div>
 
           <div className="soft-file-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {filtered.map((project, index) => (
-              <button key={project.id} onClick={() => setSelectedProject(project)} className={`soft-file-card group relative overflow-hidden rounded-[1.8rem] bg-[#fffdf8] p-3 text-left shadow-[0_16px_38px_rgba(58,31,26,.08)] ${index % 5 === 1 ? 'lg:translate-y-8' : ''}`} data-cursor="VIEW" style={{ '--card-accent': project.accentColor || ['#8ebad6', '#e8b4c4', '#f6e6a6', '#b9d2c2'][index % 4] } as React.CSSProperties}>
+              <button key={project.id} onClick={() => setSelectedProject(project)} className={`soft-file-card group relative overflow-hidden rounded-[1.8rem] bg-[#fffdf8] p-3 text-left shadow-[0_16px_38px_rgba(58,31,26,.08)] ${index === 0 ? 'sm:col-span-2' : ''}`} data-cursor="VIEW" style={{ '--card-accent': project.accentColor || ['#8ebad6', '#e8b4c4', '#f6e6a6', '#b9d2c2'][index % 4] } as React.CSSProperties}>
                 <span className="project-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                <div className="project-card-surface relative aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-[#dceaf2] will-change-transform">
+                <div className={`project-card-surface relative overflow-hidden rounded-[1.25rem] bg-[#dceaf2] will-change-transform ${index === 0 ? 'aspect-[4/3] sm:aspect-[2/1] lg:aspect-[2.05/1]' : 'aspect-[4/3]'}`}>
                   <img src={project.imageUrl} alt={project.title} className="project-card-image h-full w-full object-cover" />
                   <span className="project-card-wash" />
                   <span className="project-view-pill">Open case study</span>
@@ -343,10 +410,18 @@ const Portfolio: React.FC<PortfolioProps> = ({ onModalChange }) => {
                 <div className="project-card-copy px-2 pb-3 pt-5">
                   <span className="text-[10px] font-semibold uppercase tracking-[.16em] text-[#75a7c7]">{project.category}</span>
                   <h3 className="mt-2 text-xl font-semibold leading-[1.02] tracking-[-.04em] text-[#3a1f1a]">{project.title}</h3>
+                  {index === 0 && <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#6a514a]">{project.description}</p>}
                 </div>
               </button>
             ))}
           </div>
+          {allInFilter.length > initialCount && (
+            <div className="mt-14 flex justify-center">
+              <button onClick={() => setShowAll((value) => !value)} className="rounded-full border border-[#3a1f1a]/20 bg-white px-6 py-3 text-sm font-bold text-[#3a1f1a] shadow-[0_10px_24px_rgba(58,31,26,.08)] transition-transform hover:-translate-y-0.5" aria-expanded={showAll}>
+                {showAll ? 'Show fewer projects' : `Show all ${allInFilter.length} projects`}
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

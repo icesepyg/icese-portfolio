@@ -4,6 +4,8 @@
 
 import { Experience, Project, Skill, Certification } from './types';
 import managedContent from './content/managed.json';
+import { CRM_CASE_STUDY, CIMB_CASE_STUDY, UUPAY_CASE_STUDY, TRIP_CASE_STUDY, PHOTOBOOTH_CASE_STUDY, NUCLEUS_CASE_STUDY } from './content/caseStudies';
+
 import { 
   Figma, 
   PenTool, 
@@ -29,6 +31,25 @@ export const COLORS = {
 };
 
 const CORE_EXPERIENCES: Experience[] = [
+  {
+    id: 'cimb-uiux-intern',
+    role: 'UI/UX Design Intern',
+    company: 'CIMB · Group Wholesale Banking · Transaction Banking',
+    period: 'Sep 2026 – Present',
+    type: 'Internship',
+    visible: true,
+    order: 0,
+    description: [
+      'Support Digital Business MY on OCTO Biz research and product design for commercial and SME banking journeys.',
+      'Audited navigation, dashboards, forms, transfer journeys and accessibility; documented production-to-Figma inconsistencies and improvement priorities.',
+      'Developed research, personas, information architecture, user flows and prototype direction for a self-service Secure Token journey.',
+      'Designed a task-focused, responsive OCTO Biz landing-page concept using call-centre pain points, competitor research, reusable components, eForms and clearer application paths.',
+      'Recreated and standardised 28 editable administration screens with the existing OCTO Biz design system, and aligned Maker and Approver transaction flows.',
+      'Researching the Reports and Download journey through current-state analysis and local and international business-banking benchmarks.',
+      'Used AI-assisted workflows (Codex with Figma MCP and the Figma Plugin API) to script token-bound components, form UI kits and screen builds from the design system’s variables, then QA’d them against production references.',
+      'Joined CIMB’s session with Figma on Figma Make, Figma Agent, Dev Mode, the MCP server and Code Connect for faster design-to-development handoff.'
+    ]
+  },
   {
     id: '3go-tech',
     role: 'UI/UX Designer',
@@ -147,6 +168,121 @@ const CORE_CERTIFICATIONS: Certification[] = [
 ];
 
 const CORE_PROJECTS: Project[] = [
+  {
+    id: 'cimb-enterprise-banking-ux',
+    title: 'CIMB OCTO Biz Website and Mobile Application',
+    category: 'Enterprise Banking UX · Internship',
+    group: 'Product',
+    description: 'UX audit, a self-service Secure Token journey, a responsive landing page redesign and design-system screens for CIMB OCTO Biz, the business banking platform for commercial and SME customers.',
+    imageUrl: '/assets/cimb/octo-redesign-part1.jpg',
+    tools: ['Figma', 'FigJam', 'Figma Variables', 'Codex + Figma MCP', 'User Research', 'User Flows', 'Design Systems'],
+    featured: true,
+    year: '2026',
+    role: 'UI/UX Design Intern',
+    order: -5,
+    challenge: 'Business users needed help with urgent tasks (first login, changed phone, locked access) and many ended up calling the Business Call Centre, while new businesses struggled to understand OCTO Biz and apply.',
+    solution: 'I audited the platform, designed a self-service Secure Token journey, restructured the landing page around urgent tasks and discovery for desktop and mobile, and built consistent admin and Maker/Approver screens with the existing design system.',
+    outcome: 'Delivered research, journeys, wireframes, high-fidelity concepts, a form UI kit and about 28 standardised admin screens for team review. Launch and customer impact are not claimed.',
+    details: CIMB_CASE_STUDY,
+  },
+  {
+    id: 'trip-together-pwa',
+    title: 'Trip Together',
+    category: 'Family Travel PWA · Product Design & Build',
+    group: 'Product',
+    description: 'A bilingual, mobile-first travel app for a seven-day family trip: live Today dashboard, 130+ activity itinerary, planner schedule changes, linked tickets, CNY/MYR expenses, checklist, reminders and offline support.',
+    imageUrl: '/assets/trip-together-cover.jpg',
+    tools: ['OpenAI Codex', 'React', 'TypeScript', 'Next.js', 'PWA', 'Cloudflare D1/R2', 'Drizzle ORM'],
+    links: [
+      { label: 'Live app', url: 'https://chuanyu-family-trip.ygphoon.chatgpt.site' },
+    ],
+    featured: true,
+    year: '2026',
+    role: 'Product Designer and Builder',
+    order: -3,
+    challenge: 'As the family trip planner, every schedule, ticket and expense question came to me, and travel details were scattered across email, booking apps, notes and WhatsApp.',
+    solution: 'I designed and built one shared bilingual app around the question "what now?", with role-based planner controls that update every later flexible activity, and tickets linked to the activity that needs them.',
+    outcome: 'A working PWA built for our September 2026 family trip: 7 days, 3 cities and 130+ activities, with live sync every five seconds. No formal usability metrics are claimed.',
+    details: TRIP_CASE_STUDY,
+  },
+  {
+    id: 'icese-studio-crm',
+    title: 'Icese Studio CRM',
+    category: 'AI-Powered Product · Flagship Case Study',
+    group: 'Product',
+    description: 'An AI-assisted CRM and daily coach for my landing-page studio: outreach cards with drafted messages, a pipeline synced to Google Sheets, client projects, insights and a gamified learning journey.',
+    imageUrl: '/assets/crm/crm-01-daily-outreach.jpg',
+    tools: ['Claude', 'Google Sheets MCP', 'Prompt Engineering', 'Product Design', 'Gamification', 'Data Visualisation'],
+    featured: true,
+    year: '2026',
+    role: 'Product Designer, Researcher and Builder',
+    order: -6,
+    challenge: 'Client outreach was spread across a spreadsheet, WhatsApp, Facebook, notes and old chats. Every day started with deciding what to do, follow-ups slipped, and I couldn\'t tell which channel worked.',
+    solution: 'I designed one workspace that plans each day, drafts every message with Claude, writes everything back to my Google Sheet through MCP, tracks clients and projects, and turns a repetitive habit into visible progress.',
+    outcome: 'In its first weeks: 231 messages logged, 32 replies, 3 client builds in progress and one client page live. Data showed WhatsApp (19%) and email (15%) far outperform Facebook messages (0%), so I changed my outreach plan.',
+    details: CRM_CASE_STUDY,
+  },
+  {
+    id: 'uu-pay-wallet',
+    title: 'UU Pay Crypto Payment App',
+    category: 'Fintech Mobile App · UI/UX Design',
+    group: 'Product',
+    description: 'Cards, top-up, transfers, fiat withdrawal, eSIM, spending analytics, chat, an AI assistant, gifts and KYC for UU Pay, a crypto payment app live on the App Store and Google Play.',
+    imageUrl: '/assets/uupay/cover.jpg',
+    tools: ['Figma', 'User Flows', 'Competitive Research', 'Prototyping', 'Design Systems', 'AI Assistant UX'],
+    links: [
+      { label: 'App Store', url: 'https://apps.apple.com/us/app/uupay-enjoy-global-crypto-trad/id6749419646' },
+      { label: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.uupay.app' },
+    ],
+    featured: true,
+    year: '2025–2026',
+    role: 'UI/UX Designer at 3GO Technology',
+    order: -4,
+    challenge: 'Crypto payments feel risky to everyday users: unfamiliar currencies, irreversible transfers, fees, exchange rates and strict identity checks.',
+    solution: 'I designed flows across the app with one consistent pattern for amounts, recipients and PIN confirmation, and showed fees, rates and consequences before every confirm button.',
+    outcome: 'Designed for a live app on the App Store and Google Play: 17 flows from cards and eSIM to an AI assistant, with full states and annotated handoff for a China-based engineering team.',
+    details: UUPAY_CASE_STUDY,
+  },
+  {
+    id: 'interactive-photobooth',
+    title: 'Interactive Photobooth',
+    category: 'Interaction Design · Built with AI',
+    group: 'Web',
+    description: 'A browser photobooth that recreates the real ritual: choose a NutriShare frame, pose for a three-shot countdown, watch an animated strip print, then download or share it. Built with AI coding assistants and used live at the Crash Out exhibition.',
+    imageUrl: '/assets/photobooth/pb-11.jpg',
+    tools: ['AI coding assistants', 'JavaScript', 'GSAP', 'Canvas', 'Web Share API', 'Illustration'],
+    links: [
+      { label: 'Try the photobooth', url: 'https://icese-photobooth.netlify.app' },
+    ],
+    featured: true,
+    year: '2026',
+    role: 'Interaction Designer and Front-End Developer',
+    order: -1,
+    challenge: 'Most web photo apps just take a picture. The countdown, flash and printed strip, the parts people love about photobooths, are lost.',
+    solution: 'A seven-step flow that keeps each ritual, with motion as feedback, a recovery path when camera access is declined, and one-tap saving and sharing. Everything runs in the browser.',
+    outcome: 'Live on Netlify and used at my NutriShare booth at the Crash Out exhibition, where visitors paid RM5 for two printed strips.',
+    details: PHOTOBOOTH_CASE_STUDY,
+  },
+  {
+    id: 'nucleus-advisory-dxp',
+    title: 'Nucleus Advisory Website',
+    category: 'Client Project · Digital Acceleration Program',
+    group: 'Web',
+    description: 'A real-client project in the Digital Acceleration Program (DXP) by Kabel and the SME Association of Malaysia: a website for an AI-powered talent consultancy that explains its services, builds trust and drives enquiries.',
+    imageUrl: '/assets/nucleus/01-hero.jpg',
+    tools: ['Website UX', 'Information Architecture', 'UI Design', 'B2B Lead Generation', 'Teamwork'],
+    links: [
+      { label: 'Visit nucleusadvisory.co', url: 'https://nucleusadvisory.co' },
+    ],
+    featured: true,
+    year: '2026',
+    role: 'UX/UI Designer, DXP student team',
+    order: 0.5,
+    challenge: 'Nucleus Advisory offers complex AI-powered talent services that are hard to grasp quickly, and decision makers need proof before they get in touch.',
+    solution: 'A clear page hierarchy: one promise and action in the hero, early partner proof, four capability cards, a responsible AI statement, testimonials, and a contact form with area-of-interest options.',
+    outcome: 'Completed the programme with a Certificate of Completion from Kabel and the SME Association of Malaysia.',
+    details: NUCLEUS_CASE_STUDY,
+  },
   // --- CELESTIAL EVENT (Moved to Top) ---
   {
     id: 'celestial-event',
@@ -3974,9 +4110,10 @@ export const PROJECTS: Project[] = [
   ...CORE_PROJECTS.filter((project) => !MANAGED_PROJECT_IDS.has(project.id)),
 ].filter((project) => project.visible !== false).sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 
-export const SYSTEM_INSTRUCTION = `You are Icese's AI portfolio assistant. You are friendly, professional, and helpful. You are answering questions about Icese (Phoon Yuk Guan), a UI/UX Designer and Creative Designer.
-Icese specializes in UI/UX Design, Website Design, and Branding.
-Key traits: User-centered design, impactful visuals, storytelling.
+export const SYSTEM_INSTRUCTION = `You are Icese's AI portfolio assistant. You are friendly, professional, and helpful. You answer questions about Icese (Phoon Yuk Guan), a Kuala Lumpur-based UI/UX and product designer with a Bachelor of Design in Creative Media (UI/UX), CGPA 3.72, and a minor in Website Technology from Taylor's University.
+Current: UI/UX Design Intern at CIMB (Group Wholesale Banking, Transaction Banking) working on OCTO Biz enterprise banking research, user flows, responsive landing-page concepts and design-system screens.
+Previous: UI/UX Designer at 3GO Technology (UU Pay mobile wallet; worked closely with China-based colleagues in a China company culture), Multimedia Designer at Qurious Media Singapore, freelance landing-page and funnel designer.
+AI: Icese uses AI daily — ChatGPT, Claude, Codex and Gemini — for research synthesis, UX writing, prototyping and design-to-code. Projects include Trip Together (bilingual travel PWA built with Codex), Icese Studio CRM (Claude artifact with a Google Sheets MCP connection and a prompt library), AI-edited reels made with ChatCut, and Figma MCP / Plugin API scripting for token-bound components.
+Do not invent metrics, clients or confidential CIMB details.
 If asked about contact info: email is icesephoonyg@gmail.com.
-If asked about resume: provide the link.
 Be concise and engaging.`;

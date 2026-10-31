@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">UU Pay mobile wallet</title>
+  <desc id="desc">Abstract cover for a mobile wallet product design project</desc>
+  <rect width="1600" height="1000" fill="#18384a"/>
+  <circle cx="1340" cy="170" r="340" fill="#7bd0c8" opacity=".32"/>
+  <circle cx="190" cy="900" r="430" fill="#e8b4c4" opacity=".28"/>
+  <rect x="950" y="110" width="410" height="780" rx="74" fill="#f7f5ef"/>
+  <rect x="995" y="210" width="320" height="210" rx="30" fill="#7bd0c8"/>
+  <rect x="995" y="465" width="150" height="145" rx="24" fill="#e8b4c4"/>
+  <rect x="1165" y="465" width="150" height="145" rx="24" fill="#f6e6a6"/>
+  <rect x="995" y="650" width="320" height="90" rx="24" fill="#dceaf2"/>
+  <text x="120" y="260" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700" letter-spacing="8">MOBILE WALLET UX</text>
+  <text x="120" y="480" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="132" font-weight="800">UU Pay</text>
+  <text x="120" y="585" fill="#cfe8e4" font-family="Arial, Helvetica, sans-serif" font-size="42">Flows · wireframes · prototypes · developer handoff</text>
+</svg>

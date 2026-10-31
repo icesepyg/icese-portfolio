@@ -3,6 +3,18 @@ import { ArrowRight, BriefcaseBusiness } from 'lucide-react';
 import { EXPERIENCES } from '../constants';
 import { SectionId } from '../types';
 
+const GROUPS = [
+  { id: 'all', label: 'All', types: [] as string[] },
+  { id: 'design', label: 'Design roles', types: ['Full-time', 'Internship', 'Part-time'] },
+  { id: 'freelance', label: 'Freelance & business', types: ['Freelance', 'Business Owner'] },
+  { id: 'campus', label: 'Leadership & programmes', types: ['Student Activity', 'Programme'] },
+];
+
+const inGroup = (groupId: string, type: string) => {
+  const group = GROUPS.find((item) => item.id === groupId);
+  return !group || group.types.length === 0 || group.types.includes(type);
+};
+
 const ExperienceDetail: React.FC<{ active: (typeof EXPERIENCES)[number]; className?: string }> = ({ active, className = '' }) => (
   <article data-experience-panel key={active.id} className={`experience-detail rounded-[2rem] border border-[#e8b4c4] bg-white p-6 shadow-[0_20px_55px_rgba(58,31,26,.08)] md:p-10 lg:p-14 ${className}`} role="tabpanel">
     <div className="flex flex-wrap items-start justify-between gap-6 border-b border-[#3a1f1a]/10 pb-8">
@@ -25,8 +37,16 @@ const ExperienceDetail: React.FC<{ active: (typeof EXPERIENCES)[number]; classNa
 );
 
 const Experience: React.FC = () => {
+  const [group, setGroup] = useState('all');
+  const visible = EXPERIENCES.filter((item) => inGroup(group, item.type));
   const [activeId, setActiveId] = useState(EXPERIENCES[0]?.id || '');
-  const active = EXPERIENCES.find((item) => item.id === activeId) || EXPERIENCES[0];
+  const active = visible.find((item) => item.id === activeId) || visible[0];
+
+  const chooseGroup = (id: string) => {
+    setGroup(id);
+    const first = EXPERIENCES.find((item) => inGroup(id, item.type));
+    if (first) setActiveId(first.id);
+  };
 
   useEffect(() => {
     if (!window.gsap) return;
@@ -57,9 +77,22 @@ const Experience: React.FC = () => {
           <h2 data-kinetic className="mt-4 text-[clamp(3.7rem,7vw,7rem)] font-black leading-[.82] tracking-[-.07em] text-[#3a1f1a]">Places where I learned by doing.</h2>
         </div>
 
+        <div className="mb-8 flex flex-wrap gap-2" role="group" aria-label="Filter experience by category">
+          {GROUPS.map((item) => {
+            const count = EXPERIENCES.filter((experience) => inGroup(item.id, experience.type)).length;
+            const selected = group === item.id;
+            return (
+              <button key={item.id} onClick={() => chooseGroup(item.id)} aria-pressed={selected} className={`inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold transition-colors duration-200 ${selected ? 'border-[#3a1f1a] bg-[#3a1f1a] text-white' : 'border-[#3a1f1a]/15 bg-white text-[#3a1f1a] hover:border-[#75a7c7]'}`}>
+                {item.label}
+                <span className={`grid h-6 min-w-6 place-items-center rounded-full px-1.5 text-xs ${selected ? 'bg-white/20' : 'bg-[#dceaf2]'}`}>{count}</span>
+              </button>
+            );
+          })}
+        </div>
+
         <div className="experience-browser grid gap-5 lg:grid-cols-[minmax(290px,.68fr)_minmax(0,1.7fr)]" data-scroll-reveal>
           <div className="experience-list grid content-start gap-3" role="tablist" aria-label="Work experience">
-            {EXPERIENCES.map((experience) => {
+            {visible.map((experience) => {
               const selected = experience.id === active.id;
               return (
                 <React.Fragment key={experience.id}>
@@ -72,7 +105,8 @@ const Experience: React.FC = () => {
                 >
                   <span>
                     <strong className="block text-lg leading-tight md:text-xl">{experience.company}</strong>
-                    <small className={`mt-2 block text-[10px] font-black uppercase tracking-[.12em] ${selected ? 'text-white/65' : 'text-[#8a716a]'}`}>{experience.role}</small>
+                    <small className={`mt-2 block text-sm font-semibold ${selected ? 'text-white/75' : 'text-[#6a514a]'}`}>{experience.role}</small>
+                    <small className={`mt-1 block text-xs ${selected ? 'text-white/55' : 'text-[#8a716a]'}`}>{experience.type}{experience.period ? `, ${experience.period}` : ''}</small>
                   </span>
                   <ArrowRight className={`transition-transform duration-200 ${selected ? 'translate-x-1' : 'text-[#75a7c7] group-hover:translate-x-1'}`} size={20} />
                 </button>

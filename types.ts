@@ -5,7 +5,7 @@ export interface Experience {
   role: string;
   company: string;
   period?: string;
-  type: 'Full-time' | 'Part-time' | 'Freelance' | 'Student Activity' | 'Business Owner';
+  type: 'Full-time' | 'Part-time' | 'Freelance' | 'Student Activity' | 'Business Owner' | 'Programme' | 'Internship';
   description: string[];
   visible?: boolean;
   order?: number;
@@ -58,6 +58,7 @@ export interface ChatMessage {
 export enum SectionId {
   HERO = 'hero',
   ABOUT = 'about',
+  AWARDS = 'awards',
   EXPERIENCE = 'experience',
   SKILLS = 'skills',
   PORTFOLIO = 'portfolio',

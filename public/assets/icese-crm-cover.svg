@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Icese Studio CRM</title>
+  <desc id="desc">Abstract cover for an AI-assisted studio CRM prototype</desc>
+  <rect width="1600" height="1000" fill="#f2efe7"/>
+  <rect x="85" y="84" width="1430" height="832" rx="54" fill="#171815"/>
+  <rect x="135" y="150" width="270" height="700" rx="28" fill="#292b28"/>
+  <rect x="455" y="150" width="1000" height="140" rx="28" fill="#f6e6a6"/>
+  <rect x="455" y="335" width="600" height="220" rx="28" fill="#8ebad6"/>
+  <rect x="1100" y="335" width="355" height="220" rx="28" fill="#e8b4c4"/>
+  <rect x="455" y="600" width="1000" height="250" rx="28" fill="#f7f3eb"/>
+  <text x="175" y="255" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="800">IS</text>
+  <text x="505" y="245" fill="#171815" font-family="Arial, Helvetica, sans-serif" font-size="68" font-weight="800">Icese Studio CRM</text>
+  <text x="505" y="455" fill="#171815" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700">Pipeline · projects · assistant</text>
+  <text x="505" y="700" fill="#171815" font-family="Arial, Helvetica, sans-serif" font-size="42">AI-assisted workflow prototype</text>
+</svg>

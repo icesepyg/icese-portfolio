@@ -19,7 +19,7 @@ const About: React.FC = () => (
             <img src="/assets/about-profile.jpg" alt="Phoon Yuk Guan — Icese" className="aspect-[4/5] w-full object-cover grayscale-[10%]" />
             <div className="tape absolute -top-5 left-1/2 h-10 w-32 -translate-x-1/2 rotate-2 bg-[#e8b4c4]/75" />
           </div>
-          <div className="absolute -bottom-8 -right-6 rotate-[8deg] rounded-2xl bg-[#f6e6a6] px-5 py-4 text-sm font-black text-[#3a1f1a] shadow-[0_16px_35px_rgba(58,31,26,.15)]">UI/UX + GRAPHIC<br />+ WEB DESIGN</div>
+          <div className="absolute -bottom-8 -right-6 rotate-[8deg] rounded-2xl bg-[#f6e6a6] px-5 py-4 text-sm font-black text-[#3a1f1a] shadow-[0_16px_35px_rgba(58,31,26,.15)]">UI/UX + FINTECH<br />+ AI WORKFLOWS</div>
         </div>
 
         <div data-scroll-reveal data-scroll-tilt="1">
@@ -28,10 +28,10 @@ const About: React.FC = () => (
           </h2>
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             <div className="rotate-[-1deg] rounded-3xl bg-[#f4efe7] p-6 shadow-[0_18px_40px_rgba(58,31,26,.10)]">
-              <p className="text-lg font-bold leading-relaxed">I am a proactive and ambitious designer with strong leadership and organizational skills. My educational background includes a <strong>Bachelor of Design in Creative Media Specialising in UI/UX</strong> and a <strong>Minor in Website Development Technologies</strong>.</p>
+              <p className="text-lg font-bold leading-relaxed">I’m a UI/UX and product designer working on fintech: enterprise banking journeys at <strong>CIMB</strong> and the <strong>UU Pay</strong> mobile wallet at 3GO Technology. My background includes a <strong>Bachelor of Design in Creative Media Specialising in UI/UX</strong> and a <strong>Minor in Website Development Technologies</strong>.</p>
             </div>
             <div className="rotate-[1.5deg] rounded-3xl bg-white p-6 shadow-[0_18px_40px_rgba(58,31,26,.10)]">
-              <p className="leading-relaxed text-stone-600">I am dedicated to creating <strong>user-centered designs</strong> that make a positive impact. Adaptable to various design styles, I bring creativity and problem-solving skills to every project I undertake.</p>
+              <p className="leading-relaxed text-stone-600">I care about <strong>user-centred design</strong>, consistent design systems and clear handoff. I use AI every day (ChatGPT, Claude, Codex, Gemini, Figma MCP) to research, prototype and build faster, and I can code what I design in HTML, CSS, JavaScript and React.</p>
             </div>
           </div>
           <div className="mt-9 flex flex-wrap gap-3">

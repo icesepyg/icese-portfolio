@@ -68,7 +68,7 @@ collections:
               - label: Type
                 name: type
                 widget: select
-                options: [Full-time, Part-time, Freelance, Student Activity, Business Owner]
+                options: [Full-time, Part-time, Freelance, Student Activity, Business Owner, Programme, Internship]
               - { label: What I did, name: description, widget: list, field: { label: Responsibility or achievement, name: item, widget: string } }
           - label: Portfolio Projects
             name: projects

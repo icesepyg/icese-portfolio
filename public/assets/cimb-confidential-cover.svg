@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Enterprise banking UX internship</title>
+  <desc id="desc">Abstract non-confidential cover for enterprise banking UX work</desc>
+  <rect width="1600" height="1000" fill="#111311"/>
+  <path d="M0 760C310 570 520 860 825 680c270-160 450-90 775 90v230H0Z" fill="#7c1725"/>
+  <circle cx="1260" cy="200" r="310" fill="#d9cdbd" opacity=".16"/>
+  <circle cx="1390" cy="90" r="180" fill="#8ebad6" opacity=".18"/>
+  <text x="120" y="180" fill="#f2eee7" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" letter-spacing="7">CONFIDENTIAL WORK SUMMARY</text>
+  <text x="120" y="420" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="116" font-weight="800">Enterprise banking</text>
+  <text x="120" y="545" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="116" font-weight="800">UX internship</text>
+  <text x="120" y="665" fill="#d9cdbd" font-family="Arial, Helvetica, sans-serif" font-size="42">Research · journeys · design systems · responsive product UI</text>
+</svg>

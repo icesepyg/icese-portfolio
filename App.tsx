@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Achievements from './components/Achievements';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
-import ChatBot from './components/ChatBot';
 import ClickSpark from './components/ClickSpark';
 import ScrollStatement from './components/ScrollStatement';
 import WorldIntro from './components/WorldIntro';
@@ -180,6 +180,7 @@ const App: React.FC = () => {
         <WorldIntro />
         <Hero />
         <About />
+        <Achievements />
         <ScrollStatement />
         <ProcessLab />
         <Experience />
@@ -187,9 +188,6 @@ const App: React.FC = () => {
         <Portfolio onModalChange={setIsPortfolioModalOpen} />
         <Contact />
       </main>
-      <div className={`site-chatbot transition-opacity duration-300 ${isPortfolioModalOpen ? 'pointer-events-none opacity-0' : 'opacity-100'}`}>
-        <ChatBot />
-      </div>
       <CreativeCursor />
       <ScrollProgress />
       <ClickSpark />
